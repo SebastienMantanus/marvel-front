@@ -33,7 +33,7 @@ const Characters = () => {
                 <div key={element._id} className="characters-thumbnail">
                   <img src={thumbnail} alt={element.name} />
                   <h2>{element.name}</h2>
-                  <p>{element.description}</p>
+                  {element.description && <p>show description...</p>}
                 </div>
               );
             })}

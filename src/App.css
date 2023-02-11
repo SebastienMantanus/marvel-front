@@ -9,6 +9,7 @@
 h1 {
   font-size: 40px;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -23,6 +24,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 7px 0;
 }
 header > img {
   margin-left: 15px;
@@ -49,7 +51,6 @@ header div {
 .characters-main {
   font-family: "Roboto Condensed", sans-serif;
   background-color: black;
-  /* height: 800vh; */
   background-image: url("./assets/characters.png");
   background-position: top;
   background-repeat: no-repeat;
@@ -74,6 +75,7 @@ header div {
 }
 
 .characters-thumbnail {
+  position: relative;
   width: 200px;
   display: flex;
   flex-direction: column;
