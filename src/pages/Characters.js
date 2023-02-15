@@ -4,12 +4,18 @@ import { useState, useEffect } from "react";
 const Characters = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        let pageSkip = "";
+        if (skip > 0) {
+          pageSkip = "?skip=" + skip;
+        }
+        console.log("PAGESKIP =>" + pageSkip);
         const response = await axios.get(
-          "https://marvel--marvel--vqtmsgjlf7qx.code.run/characters"
+          `https://marvel--marvel--vqtmsgjlf7qx.code.run/characters${pageSkip}`
         );
         setData(response.data);
         setIsLoading(false);
@@ -18,7 +24,7 @@ const Characters = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [skip]);
 
   return (
     <div className="characters-main">
@@ -37,6 +43,26 @@ const Characters = () => {
                 </div>
               );
             })}
+          </div>
+          <div>
+            {skip >= 1 && (
+              <button
+                onClick={() => {
+                  setSkip((current) => current - 1);
+                }}
+              >
+                précédent
+              </button>
+            )}
+            <button
+              onClick={() => {
+                setSkip((current) => current + 1);
+              }}
+            >
+              Suivant
+            </button>
+
+            <p>Page : {skip}</p>
           </div>
         </div>
       ) : (
