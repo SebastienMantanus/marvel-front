@@ -67,6 +67,21 @@ header div {
   width: 80%;
 }
 
+.title-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-search input {
+  width: 500px;
+  height: 35px;
+  border-radius: 10px;
+  padding: 10px;
+  border: #ff0000 solid 2px;
+  font-size: 15px;
+}
+
 .characters-grid {
   display: flex;
   justify-content: last baseline;
@@ -85,4 +100,9 @@ header div {
 .characters-thumbnail > img {
   border-bottom: 5px red solid;
   object-fit: cover;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
 }

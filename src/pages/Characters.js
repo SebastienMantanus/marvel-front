@@ -5,17 +5,23 @@ const Characters = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let pageSkip = "";
+        let characterSearch = "";
+
         if (skip > 0) {
-          pageSkip = "?skip=" + skip;
+          pageSkip = skip;
         }
-        console.log("PAGESKIP =>" + pageSkip);
+        if (search) {
+          characterSearch = search;
+        }
+
         const response = await axios.get(
-          `https://marvel--marvel--vqtmsgjlf7qx.code.run/characters${pageSkip}`
+          `https://marvel--marvel--vqtmsgjlf7qx.code.run/characters?skip=${pageSkip}&name=${characterSearch}`
         );
         setData(response.data);
         setIsLoading(false);
@@ -24,13 +30,35 @@ const Characters = () => {
       }
     };
     fetchData();
-  }, [skip]);
+  }, [skip, search]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
   return (
     <div className="characters-main">
       {!isLoading ? (
         <div>
-          <h1>Characters</h1>
+          <div className="title-search">
+            <h1>Characters</h1>
+            <p>
+              Page : {skip} / {Math.ceil(data.count / 100)}{" "}
+            </p>
+            <form
+              onSubmit={() => {
+                handleSubmit();
+              }}
+            >
+              <input
+                type="text"
+                value={search}
+                placeholder="Rechercher un personnage"
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                }}
+              ></input>
+            </form>
+          </div>
           <div className="characters-grid">
             {data.results.map((element, index) => {
               const thumbnail = `${element.thumbnail.path}/portrait_xlarge.${element.thumbnail.extension}`;
@@ -44,7 +72,7 @@ const Characters = () => {
               );
             })}
           </div>
-          <div>
+          <div className="navigation">
             {skip >= 1 && (
               <button
                 onClick={() => {
@@ -54,15 +82,15 @@ const Characters = () => {
                 précédent
               </button>
             )}
-            <button
-              onClick={() => {
-                setSkip((current) => current + 1);
-              }}
-            >
-              Suivant
-            </button>
-
-            <p>Page : {skip}</p>
+            {data.count > 100 && (
+              <button
+                onClick={() => {
+                  setSkip((current) => current + 1);
+                }}
+              >
+                Suivant
+              </button>
+            )}
           </div>
         </div>
       ) : (
