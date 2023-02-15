@@ -42,7 +42,7 @@ const Characters = () => {
           <div className="title-search">
             <h1>Characters</h1>
             <p>
-              Page : {skip} / {Math.ceil(data.count / 100)}{" "}
+              Page : {skip + 1} / {Math.ceil(data.count / 100) + 1}
             </p>
             <form
               onSubmit={() => {
@@ -79,7 +79,7 @@ const Characters = () => {
                   setSkip((current) => current - 1);
                 }}
               >
-                précédent
+                Page précédente
               </button>
             )}
             {data.count > 100 && (
@@ -88,7 +88,7 @@ const Characters = () => {
                   setSkip((current) => current + 1);
                 }}
               >
-                Suivant
+                Page suivante
               </button>
             )}
           </div>

@@ -105,4 +105,16 @@ header div {
 .navigation {
   display: flex;
   justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
+.navigation > button {
+  background-color: #ff0000;
+  color: white;
+  font-size: 25px;
+  border: none;
+  width: 250px;
+  height: 40px;
 }
