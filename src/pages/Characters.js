@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Characters = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [search, setSearch] = useState("");
-  const [showDescription, SetShowDescription] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,21 +69,15 @@ const Characters = () => {
               const thumbnail = `${element.thumbnail.path}/portrait_xlarge.${element.thumbnail.extension}`;
 
               return (
-                <div key={element._id} className="characters-thumbnail">
-                  <img src={thumbnail} alt={element.name} />
-                  <h2>{element.name}</h2>
-                  {element.description[index] && (
-                    <>
-                      <p
-                        onClick={() => {
-                          SetShowDescription(!showDescription);
-                        }}
-                      >
-                        En savoir plus...
-                      </p>
-                      {showDescription && <p>{element.description[index]}</p>}
-                    </>
-                  )}
+                <div key={element._id}>
+                  <Link
+                    to={`/character/${element._id}`}
+                    className="characters-thumbnail"
+                  >
+                    <img src={thumbnail} alt={element.name} />
+                    <h2>{element.name}</h2>
+                    {/* {element.description && <p>{element.description}</p>} */}
+                  </Link>
                 </div>
               );
             })}

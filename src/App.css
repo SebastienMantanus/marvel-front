@@ -10,6 +10,10 @@
   position: relative;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
 h1 {
   font-size: 40px;
   text-transform: uppercase;
@@ -143,6 +147,28 @@ header div {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+/* CHARACTER */
+
+.charater-title {
+  display: flex;
+  justify-content: right;
+}
+
+.charater-title img {
+  width: 300px;
+  height: 500px;
+  object-fit: cover;
+  margin-bottom: 30px;
+}
+
+.character-details {
+  display: flex;
+  gap: 50px;
+}
+
+.character-details h2 {
+  font-size: 30px;
 }
 /* FOOTER */
 
