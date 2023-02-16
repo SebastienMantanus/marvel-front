@@ -1,5 +1,11 @@
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <footer>
+      <div>
+        <p>Marvel By Freemulder @LeReacteur 2023</p>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

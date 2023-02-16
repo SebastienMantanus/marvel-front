@@ -6,6 +6,7 @@ const Characters = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
   const [search, setSearch] = useState("");
+  const [showDescription, SetShowDescription] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +19,7 @@ const Characters = () => {
         }
         if (search) {
           characterSearch = search;
+          setSkip(0);
         }
 
         const response = await axios.get(
@@ -35,15 +37,18 @@ const Characters = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
   return (
     <div className="characters-main">
       {!isLoading ? (
         <div>
           <div className="title-search">
             <h1>Characters</h1>
-            <p>
-              Page : {skip + 1} / {Math.ceil(data.count / 100) + 1}
-            </p>
+            {data.count > 100 && (
+              <p>
+                Page : {skip + 1} / {Math.ceil(data.count / 100) + 1}
+              </p>
+            )}
             <form
               onSubmit={() => {
                 handleSubmit();
@@ -67,11 +72,23 @@ const Characters = () => {
                 <div key={element._id} className="characters-thumbnail">
                   <img src={thumbnail} alt={element.name} />
                   <h2>{element.name}</h2>
-                  {element.description && <p>show description...</p>}
+                  {element.description[index] && (
+                    <>
+                      <p
+                        onClick={() => {
+                          SetShowDescription(!showDescription);
+                        }}
+                      >
+                        En savoir plus...
+                      </p>
+                      {showDescription && <p>{element.description[index]}</p>}
+                    </>
+                  )}
                 </div>
               );
             })}
           </div>
+
           <div className="navigation">
             {skip >= 1 && (
               <button
