@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Characters = () => {
+const Characters = ({ SetStarred, starred }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -32,7 +32,7 @@ const Characters = () => {
       }
     };
     fetchData();
-  }, [skip, search]);
+  }, [skip, search, starred]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -67,17 +67,36 @@ const Characters = () => {
           <div className="characters-grid">
             {data.results.map((element, index) => {
               const thumbnail = `${element.thumbnail.path}/portrait_xlarge.${element.thumbnail.extension}`;
+              let newArray = [];
+              newArray = [...starred];
+              const find = newArray.find(({ id }) => id === element._id);
 
               return (
-                <div key={element._id}>
+                <div key={element._id} className="character-tile">
                   <Link
                     to={`/character/${element._id}`}
                     className="characters-thumbnail"
                   >
                     <img src={thumbnail} alt={element.name} />
-                    <h2>{element.name}</h2>
-                    {/* {element.description && <p>{element.description}</p>} */}
                   </Link>
+                  <h2>{element.name}</h2>
+                  {!find ? (
+                    <button
+                      onClick={() => {
+                        newArray.push({
+                          id: element._id,
+                          name: element.name,
+                          thumbnail: thumbnail,
+                        });
+                        SetStarred(newArray);
+                      }}
+                    >
+                      + mettre en favoris
+                    </button>
+                  ) : (
+                    <p>Favori !</p>
+                  )}
+                  {/* {element.description && <p>{element.description}</p>} */}
                 </div>
               );
             })}
