@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const Starred = ({ SetStarred, starred }) => {
-  console.log(starred);
+const Starred = () => {
+  let starredArray = [];
+
+  if (Cookies.get("starred")) {
+    const cookieRead = Cookies.get("starred");
+    starredArray = JSON.parse(cookieRead);
+    console.log(starredArray);
+  }
 
   return (
     <div className="characters-main">
       <div className="characters-grid">
         <h1>Favoris</h1>
-        {starred.map((element, index) => {
+        {starredArray.map((element, index) => {
           return (
             <div className="starred-list" key={index}>
               <div>
@@ -29,9 +36,13 @@ const Starred = ({ SetStarred, starred }) => {
                 <div>
                   <button
                     onClick={() => {
-                      const array = [...starred];
-                      array.splice(index, 1);
-                      SetStarred(array);
+                      starredArray.splice(index, 1);
+                      const cookieArray = JSON.stringify(starredArray);
+                      Cookies.set("starred", cookieArray, {
+                        expires: 30,
+                        SameSite: "Lax",
+                      });
+                      window.location.reload();
                     }}
                   >
                     Retirer des faforis
@@ -42,13 +53,23 @@ const Starred = ({ SetStarred, starred }) => {
           );
         })}
       </div>
-      <button
-        onClick={() => {
-          SetStarred([]);
-        }}
-      >
-        Effacer
-      </button>
+      <div className="starred-delete-button">
+        {starredArray.length > 0 && (
+          <button
+            onClick={() => {
+              starredArray = [];
+              const cookieArray = JSON.stringify(starredArray);
+              Cookies.set("starred", cookieArray, {
+                expires: 30,
+                SameSite: "Lax",
+              });
+              window.location.reload();
+            }}
+          >
+            Effacer tous vos favoris
+          </button>
+        )}
+      </div>
     </div>
   );
 };

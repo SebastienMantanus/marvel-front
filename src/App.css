@@ -222,6 +222,21 @@ header div {
 .starred-details a :hover {
   text-decoration: underline;
 }
+
+.starred-delete-button {
+  padding: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.starred-delete-button button {
+  color: white;
+  background-color: #ff0000;
+  border: none;
+  padding: 10px;
+  margin-bottom: 30px;
+}
 /* FOOTER */
 
 footer {

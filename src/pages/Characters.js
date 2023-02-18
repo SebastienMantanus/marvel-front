@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Characters = ({ SetStarred, starred }) => {
   const [data, setData] = useState();
@@ -94,6 +95,12 @@ const Characters = ({ SetStarred, starred }) => {
                           thumbnail: thumbnail,
                         });
                         SetStarred(newArray);
+                        // Envoi du tableau dans un Cookie
+                        const cookieArray = JSON.stringify(newArray);
+                        Cookies.set("starred", cookieArray, {
+                          expires: 30,
+                          SameSite: "Lax",
+                        });
                       }}
                     >
                       + mettre en favoris
