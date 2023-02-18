@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 const Starred = () => {
+  const [updated, setUpdated] = useState(false);
   let starredArray = [];
 
   if (Cookies.get("starred")) {
@@ -42,7 +44,7 @@ const Starred = () => {
                         expires: 30,
                         SameSite: "Lax",
                       });
-                      window.location.reload();
+                      setUpdated(!updated);
                     }}
                   >
                     Retirer des faforis
@@ -63,7 +65,7 @@ const Starred = () => {
                 expires: 30,
                 SameSite: "Lax",
               });
-              // window.location.reload();
+              setUpdated(!updated);
             }}
           >
             Effacer tous vos favoris
