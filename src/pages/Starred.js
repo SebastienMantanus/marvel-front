@@ -63,7 +63,7 @@ const Starred = () => {
                 expires: 30,
                 SameSite: "Lax",
               });
-              window.location.reload();
+              // window.location.reload();
             }}
           >
             Effacer tous vos favoris
