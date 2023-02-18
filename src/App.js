@@ -6,10 +6,12 @@ import Starred from "./pages/Starred";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Character from "./pages/Character";
+import Description from "./components/Description";
 import { useState } from "react";
 
 function App() {
   const [starred, SetStarred] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   return (
     <Router>
@@ -17,7 +19,14 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Characters starred={starred} SetStarred={SetStarred} />}
+          element={
+            <Characters
+              starred={starred}
+              SetStarred={SetStarred}
+              visible={visible}
+              setVisible={setVisible}
+            />
+          }
         />
         <Route
           path="/comics"
@@ -30,6 +39,7 @@ function App() {
         <Route path="/character/:id" element={<Character />} />
       </Routes>
       <Footer />
+      {visible && <Description setVisible={setVisible} />}
     </Router>
   );
 }

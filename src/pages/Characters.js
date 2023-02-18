@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Characters = ({ SetStarred, starred }) => {
+const Characters = ({ SetStarred, starred, setVisible }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -108,7 +108,19 @@ const Characters = ({ SetStarred, starred }) => {
                   ) : (
                     <p>Favori !</p>
                   )}
-                  {/* {element.description && <p>{element.description}</p>} */}
+                  {element.description && (
+                    <button
+                      onClick={() => {
+                        Cookies.set("description", element.description, {
+                          expires: 30,
+                          SameSite: "Lax",
+                        });
+                        setVisible(true);
+                      }}
+                    >
+                      En savoir plus...
+                    </button>
+                  )}
                 </div>
               );
             })}

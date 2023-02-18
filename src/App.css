@@ -107,7 +107,8 @@ header div {
 }
 
 .characters-grid > div > button {
-  margin-top: 8px;
+  margin-top: 20px;
+  width: 100%;
   background-color: red;
   border: none;
   color: white;
@@ -146,6 +147,41 @@ header div {
   height: 40px;
 }
 
+/* DESCRIPTION MODAL */
+.modal-root {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(46, 46, 46, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  height: 500px;
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+.modal > button {
+  align-self: flex-end;
+  margin: 20px;
+  border: none;
+  background-color: #ff0000;
+  color: white;
+}
+
+.modal > p {
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+  padding: 50px;
+}
 /* CHARACTER */
 
 .character-main {
