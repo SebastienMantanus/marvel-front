@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const Comics = () => {
+const Comics = ({ SetStarred, starred }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [skip, setSkip] = useState(0);
@@ -31,7 +31,7 @@ const Comics = () => {
       }
     };
     fetchData();
-  }, [skip, search]);
+  }, [skip, search, starred]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,11 +66,32 @@ const Comics = () => {
           <div className="characters-grid">
             {data.results.map((element, index) => {
               const thumbnail = `${element.thumbnail.path}/portrait_xlarge.${element.thumbnail.extension}`;
+              let newArray = [];
+              newArray = [...starred];
+              const find = newArray.find(({ id }) => id === element._id);
 
               return (
                 <div key={element._id} className="characters-thumbnail">
                   <img src={thumbnail} alt={element.title} />
                   <h2>{element.title}</h2>
+                  {!find ? (
+                    <button
+                      onClick={() => {
+                        newArray.push({
+                          type: "comic",
+                          id: element._id,
+                          name: element.title,
+                          description: element.description,
+                          thumbnail: thumbnail,
+                        });
+                        SetStarred(newArray);
+                      }}
+                    >
+                      + mettre en favoris
+                    </button>
+                  ) : (
+                    <p>Favori !</p>
+                  )}
                   {/* <p>{element.description}</p> */}
                 </div>
               );

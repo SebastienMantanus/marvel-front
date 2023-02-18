@@ -19,7 +19,10 @@ function App() {
           path="/"
           element={<Characters starred={starred} SetStarred={SetStarred} />}
         />
-        <Route path="/comics" element={<Comics />} />
+        <Route
+          path="/comics"
+          element={<Comics starred={starred} SetStarred={SetStarred} />}
+        />
         <Route
           path="/favoris"
           element={<Starred starred={starred} SetStarred={SetStarred} />}

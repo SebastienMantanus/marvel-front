@@ -192,6 +192,36 @@ header div {
   font-size: 20px;
   margin-bottom: 20px;
 }
+
+/* STARRED */
+.starred-list {
+  display: flex;
+  gap: 50px;
+  margin-top: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px red solid;
+}
+
+.starred-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.starred-details button {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+.starred-details a {
+  text-decoration: none;
+}
+.starred-details a :hover {
+  text-decoration: underline;
+}
 /* FOOTER */
 
 footer {

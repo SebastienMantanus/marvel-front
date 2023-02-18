@@ -66,7 +66,9 @@ const Characters = ({ SetStarred, starred }) => {
           </div>
           <div className="characters-grid">
             {data.results.map((element, index) => {
+              // Thumbnail construction
               const thumbnail = `${element.thumbnail.path}/portrait_xlarge.${element.thumbnail.extension}`;
+              // Initialysing starred management
               let newArray = [];
               newArray = [...starred];
               const find = newArray.find(({ id }) => id === element._id);
@@ -80,12 +82,15 @@ const Characters = ({ SetStarred, starred }) => {
                     <img src={thumbnail} alt={element.name} />
                   </Link>
                   <h2>{element.name}</h2>
+                  {/* Starring a character */}
                   {!find ? (
                     <button
                       onClick={() => {
                         newArray.push({
+                          type: "character",
                           id: element._id,
                           name: element.name,
+                          description: element.description,
                           thumbnail: thumbnail,
                         });
                         SetStarred(newArray);
